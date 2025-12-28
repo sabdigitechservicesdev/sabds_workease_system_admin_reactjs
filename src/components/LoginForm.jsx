@@ -71,42 +71,6 @@ const LoginForm = ({ onLoginSuccess }) => {
     }
   };
 
-  // ✅ ADD TEST BUTTON FOR MANUAL LOGIN
-  const testManualLogin = async () => {
-    try {
-      setLoading(true);
-      const response = await fetch('http://localhost:3000/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          identifier: 'subhajitmajumder147@gmail.com',
-          password: 'Test@1234'
-        })
-      });
-      
-      const data = await response.json();
-      console.log('Manual login response:', data);
-      
-      if (data.success && data.data?.tokens?.accessToken) {
-        localStorage.setItem('access_token', data.data.tokens.accessToken);
-        localStorage.setItem('user_info', JSON.stringify(data.data));
-        console.log('✅ Manual login successful! Token saved.');
-        showSuccessNotification();
-        
-        setTimeout(() => {
-          window.location.href = '/dashboard';
-        }, 1000);
-      } else {
-        setError(data.message || 'Manual login failed');
-      }
-    } catch (error) {
-      console.error('Manual login error:', error);
-      setError('Manual login failed');
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <div className="max-w-md w-full mx-auto p-6 bg-white rounded-lg ">
       <div className="text-center mb-8">
@@ -115,23 +79,6 @@ const LoginForm = ({ onLoginSuccess }) => {
         </div>
         <h1 className="text-2xl font-bold text-gray-900">Welcome to Admin Portal</h1>
         <p className="text-gray-600 mt-2">Sign in to your account</p>
-        
-        {/* ✅ ADD DEBUG SECTION */}
-        <div className="mt-4 p-2 bg-gray-50 rounded text-left text-xs">
-          <p className="font-semibold">Debug Info:</p>
-          <p>Token in localStorage: {localStorage.getItem('access_token') ? '✅ Yes' : '❌ No'}</p>
-          <button 
-            onClick={() => {
-              console.log('Current localStorage:', {
-                token: localStorage.getItem('access_token'),
-                user_info: localStorage.getItem('user_info')
-              });
-            }}
-            className="text-blue-500 hover:underline mt-1"
-          >
-            Check localStorage
-          </button>
-        </div>
       </div>
 
       {error && (
@@ -206,22 +153,6 @@ const LoginForm = ({ onLoginSuccess }) => {
           >
             {loading ? 'Signing In...' : 'Sign In'}
           </Button>
-          
-          {/* ✅ ADD TEST BUTTON */}
-          <div className="mt-4">
-            <Button
-              type="dashed"
-              size="large"
-              onClick={testManualLogin}
-              block
-              className="text-gray-600 border-gray-300"
-            >
-              Test Manual Login (SA User)
-            </Button>
-            <p className="text-xs text-gray-500 mt-1 text-center">
-              Uses: subhajitmajumder147@gmail.com / Test@1234
-            </p>
-          </div>
         </Form.Item>
       </Form>
 
