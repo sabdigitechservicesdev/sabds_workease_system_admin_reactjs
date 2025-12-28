@@ -5,11 +5,12 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import LoginPage from "./pages/LoginPage";
+// import LoginPage from "./pages/LoginPage";
 import DashboardLayout from "./layout/DashboardLayout";
 import UsersPage from "./pages/UsersPage";
 import ProtectedRoute from "./components/ProtectedRoutes";
-import RegisterPage from "./pages/RegisterPage";
+// import RegisterPage from "./pages/RegisterPage";
+import FlipAuthPage from "./pages/FlipAuthPage";
 
 function App() {
   return (
@@ -17,8 +18,8 @@ function App() {
       <div className="min-h-screen bg-gray-50">
         <Routes>
           {/* Public Routes */}
-          <Route path="/" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/" element={<FlipAuthPage/>} />
+          {/* <Route path="/register" element={<RegisterPage />} /> */}
           {/* Protected Dashboard Routes */}
           <Route
             path="/dashboard"
