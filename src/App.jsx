@@ -5,12 +5,14 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-// import LoginPage from "./pages/LoginPage";
-import DashboardLayout from "./layout/DashboardLayout";
+
 import UsersPage from "./pages/UsersPage";
-import ProtectedRoute from "./components/ProtectedRoutes";
-// import RegisterPage from "./pages/RegisterPage";
-import FlipAuthPage from "./pages/FlipAuthPage";
+import HomePage from "./pages/HomePage";
+import DemoPage from "./pages/DemoPage";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
+import DashboardPage from "./pages/DashboardPage";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
 
 function App() {
   return (
@@ -18,23 +20,16 @@ function App() {
       <div className="min-h-screen bg-gray-50">
         <Routes>
           {/* Public Routes */}
-          <Route path="/" element={<FlipAuthPage/>} />
-          {/* <Route path="/register" element={<RegisterPage />} /> */}
-          {/* Protected Dashboard Routes */}
-          <Route
-            path="/dashboard"
-            element={
-              <ProtectedRoute>
-                <DashboardLayout />
-              </ProtectedRoute>
-            }
-          >
+          <Route path="/" element={<HomePage />} />
+          <Route path="/demo" element={<DemoPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          {/* <Route path="/dashboard" element={<DashboardPage />}>
             <Route index element={<Navigate to="/dashboard/users" replace />} />
             <Route path="users" element={<UsersPage />} />
-            {/* Add more routes here */}
-          </Route>
-
-          {/* Fallback route */}
+          </Route> */}
+          <Route path="/dashboard" element={<DashboardPage />}/>
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>
